@@ -1,0 +1,23 @@
+{
+    "OpenskyNetwork": {
+        "label": {
+            "service": "サービス",
+            "method": "メソッド",
+            "host": "ホスト",
+            "header": "ヘッダ",
+            "value": "値",
+            "isQuery": "クエリ"
+        },
+        "status": {
+            "requesting": "要求中"
+        },
+        "parameters": {
+            "allStateVectors": "GET /states/all",
+            "lamin": "緯度(南端)",
+            "lomin": "経度(西端)",
+            "lamax": "緯度(北端)",
+            "lomax": "経度(東端)",
+            "optionalParameters": "任意項目"
+        }
+    }
+}

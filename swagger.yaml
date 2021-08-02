@@ -1,0 +1,44 @@
+swagger: "2.0"
+info:
+  description: "OpenSky REST API"
+  version: "1.0.0"
+  title: "OpenSky Network"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "opensky-network.org"
+basePath: "/api"
+schemes:
+- "https"
+paths:
+  /states/all:
+    get:
+      summary: "All State Vectors"
+      description: "This API call can be used to retrieve any state vector of the OpenSky."
+      operationId: "allStateVectors"
+      produces:
+      - "application/json"
+      parameters:
+        - name: lamin
+          type: number
+          required: true
+          in: query
+          description: Lower bound for the latitude in decimal degrees
+        - name: lomin
+          type: number
+          required: true
+          in: query
+          description: Lower bound for the longitude in decimal degrees
+        - name: lamax
+          type: number
+          required: true
+          in: query
+          description: Upper bound for the latitude in decimal degrees
+        - name: lomax
+          type: number
+          required: true
+          in: query
+          description: Upper bound for the longitude in decimal degrees
+      responses:
+        "200":
+          description: "successful operation"

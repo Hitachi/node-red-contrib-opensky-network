@@ -1,0 +1,23 @@
+{
+    "OpenskyNetwork": {
+        "label": {
+            "service": "Service",
+            "method": "Method",
+            "host": "Host",
+            "header": "Header",
+            "value": "Value",
+            "isQuery": "isQuery"
+        },
+        "status": {
+            "requesting": "requesting"
+        },
+        "parameters": {
+            "allStateVectors": "GET /states/all",
+            "lamin": "Latitude (southern end)",
+            "lomin": "Longitude (western end)",
+            "lamax": "Latitude (northern end)",
+            "lomax": "Longitude (eastern end)",
+            "optionalParameters": "Options"
+        }
+    }
+}

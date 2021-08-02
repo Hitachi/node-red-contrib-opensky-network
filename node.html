@@ -1,0 +1,173 @@
+<script type="text/javascript">
+    RED.nodes.registerType('opensky-network', {
+        category: 'location',
+        color: '#95CBFF',
+        defaults: {
+            method: { value: "allStateVectors", required: true },
+            allStateVectors_lamin: { value: "49" },
+            allStateVectors_laminType: { value: "num" },
+            allStateVectors_lomin: { value: "-8" },
+            allStateVectors_lominType: { value: "num" },
+            allStateVectors_lamax: { value: "59" },
+            allStateVectors_lamaxType: { value: "num" },
+            allStateVectors_lomax: { value: "2" },
+            allStateVectors_lomaxType: { value: "num" },
+            name: { value: "" }
+        },
+        inputs: 0,
+        outputs: 1,
+        icon: 'font-awesome/fa-plane',
+        label: function () {
+            return this.name || "opensky-network";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        },
+        oneditprepare: function () {
+            var selectedMethod = $('#node-input-method option:selected');
+            if (!selectedMethod.val()) {
+                var methods = $('#node-input-method').children();
+                var firstMethod = methods.first();
+                $('#node-input-method').val(firstMethod.val());
+            }
+            $("#node-input-method-item").hide();
+
+            var showParameters = function () {
+
+                $("#node-input-allStateVectors_lamin").typedInput({
+                    default: 'num',
+                    typeField: $("#node-input-allStateVectors_laminType"),
+                    types: ['num']
+                });
+
+                $("#allStateVectors_lamin").hide();
+
+                $("#node-input-allStateVectors_lomin").typedInput({
+                    default: 'num',
+                    typeField: $("#node-input-allStateVectors_lominType"),
+                    types: ['num']
+                });
+
+                $("#allStateVectors_lomin").hide();
+
+                $("#node-input-allStateVectors_lamax").typedInput({
+                    default: 'num',
+                    typeField: $("#node-input-allStateVectors_lamaxType"),
+                    types: ['num']
+                });
+
+                $("#allStateVectors_lamax").hide();
+
+                $("#node-input-allStateVectors_lomax").typedInput({
+                    default: 'num',
+                    typeField: $("#node-input-allStateVectors_lomaxType"),
+                    types: ['num']
+                });
+
+                $("#allStateVectors_lomax").hide();
+
+                $("#optional-parameters").hide();
+                $("#optional-parameters-label").hide();
+                if ($("#node-input-method").val() === 'allStateVectors') {
+
+                }
+
+                if ($("#optional-parameters").prop('checked')) {
+                    if ($("#node-input-method").val() === 'allStateVectors') {
+
+                        $("#allStateVectors_lamin").show();
+                        
+                        $("#allStateVectors_lomin").show();
+                        
+                        $("#allStateVectors_lamax").show();
+                        
+                        $("#allStateVectors_lomax").show();
+                        
+                    }
+                } else {
+                    if ($("#node-input-method").val() === 'allStateVectors') {
+
+                        $("#allStateVectors_lamin").show();
+                        
+                        $("#allStateVectors_lomin").show();
+                        
+                        $("#allStateVectors_lamax").show();
+                        
+                        $("#allStateVectors_lomax").show();
+                        
+                    }
+                }
+            };
+
+            $("#node-input-method").change(function () {
+                showParameters();
+            });
+
+            $("#optional-parameters").change(function () {
+                showParameters();
+            });
+
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="opensky-network">
+
+    <div class="form-row" id="node-input-method-item">
+        <label for="node-input-method"><i class="fa fa-tasks"></i> <span data-i18n="OpenskyNetwork.label.method"></span></label>
+        <select id="node-input-method">
+            <option value="allStateVectors" data-i18n="OpenskyNetwork.parameters.allStateVectors"></option>
+        </select>
+        &nbsp;
+        <input type="checkbox" id="optional-parameters" style="margin-left: 10px; vertical-align: text-bottom; width: auto;">
+        <label for="optional-parameters" id="optional-parameters-label" style="width: auto;"> <span data-i18n="OpenskyNetwork.parameters.optionalParameters"></span></label>
+    </div>
+
+    <div class="form-row" id="allStateVectors_lamin">
+        <label for="node-input-allStateVectors_lamin"><i class="fa fa-list"></i> <span data-i18n="OpenskyNetwork.parameters.lamin"></span></label>
+
+        <input type="text" id="node-input-allStateVectors_lamin" placeholder="Lower bound for the latitude in decimal degrees" style="width:70%">
+        <input type="hidden" id="node-input-allStateVectors_laminType">
+    </div>
+
+    <div class="form-row" id="allStateVectors_lomin">
+        <label for="node-input-allStateVectors_lomin"><i class="fa fa-list"></i> <span data-i18n="OpenskyNetwork.parameters.lomin"></span></label>
+
+        <input type="text" id="node-input-allStateVectors_lomin" placeholder="Lower bound for the longitude in decimal degrees" style="width:70%">
+        <input type="hidden" id="node-input-allStateVectors_lominType">
+    </div>
+
+    <div class="form-row" id="allStateVectors_lamax">
+        <label for="node-input-allStateVectors_lamax"><i class="fa fa-list"></i> <span data-i18n="OpenskyNetwork.parameters.lamax"></span></label>
+
+        <input type="text" id="node-input-allStateVectors_lamax" placeholder="Upper bound for the latitude in decimal degrees" style="width:70%">
+        <input type="hidden" id="node-input-allStateVectors_lamaxType">
+    </div>
+
+    <div class="form-row" id="allStateVectors_lomax">
+        <label for="node-input-allStateVectors_lomax"><i class="fa fa-list"></i> <span data-i18n="OpenskyNetwork.parameters.lomax"></span></label>
+
+        <input type="text" id="node-input-allStateVectors_lomax" placeholder="Upper bound for the longitude in decimal degrees" style="width:70%">
+        <input type="hidden" id="node-input-allStateVectors_lomaxType">
+    </div>
+
+    <hr/>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="opensky-network">
+
+    <p>OpenSky REST API</p>
+    <p><b>Methods</b></p>
+        <h3>GET /states/all</h3>
+        <p>This API call can be used to retrieve any state vector of the OpenSky.</p>
+        <dl class="message-properties">
+        <dt>lamin <span class="property-type">number</span></dt>
+        <dt>lomin <span class="property-type">number</span></dt>
+        <dt>lamax <span class="property-type">number</span></dt>
+        <dt>lomax <span class="property-type">number</span></dt>
+        </dl>
+</script>
